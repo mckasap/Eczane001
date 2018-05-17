@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int i, long l) {
-                Toast.makeText(MainActivity.this, ((ilce)parent.getItemAtPosition(i)).getID(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, ((ilce)parent.getItemAtPosition(i)).getToken(), Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -66,9 +66,11 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("TEST-->", doc.title());
 
                 Elements ilceHTML = doc.select(".ilce-link");
-
+                String token="";
+               int bas= doc.data().indexOf("token") +9;
+               token=doc.data().substring(bas,bas+16);
                 for (Element a : ilceHTML)
-                    ilceler.add(new ilce(a.attr("title"),"",a.attr("data-value")));
+                    ilceler.add(new ilce(a.attr("title"),token,a.attr("data-value")));
 
             } catch (Exception ex) {
 
