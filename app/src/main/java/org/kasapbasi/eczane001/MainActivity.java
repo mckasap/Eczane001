@@ -21,7 +21,7 @@ import java.util.jar.Manifest;
 
 public class MainActivity extends AppCompatActivity {
 
-    List<String> ilceler = new ArrayList<>();
+    List<ilce> ilceler = new ArrayList<>();
 
     Spinner spn;
 
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
                 Elements ilceHTML = doc.select(".ilce-link");
 
                 for (Element a : ilceHTML)
-                    ilceler.add(a.attr("title"));
+                    ilceler.add(new ilce(a.attr("title"),"",""));
 
             } catch (Exception ex) {
 
@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
             MainActivity.this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_spinner_item, ilceler);
+                    ArrayAdapter<ilce> spinnerAdapter = new ArrayAdapter<ilce>(MainActivity.this, android.R.layout.simple_spinner_item, ilceler);
                     spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spn.setAdapter(spinnerAdapter);
                     spinnerAdapter.notifyDataSetChanged();
